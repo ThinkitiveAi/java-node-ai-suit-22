@@ -1,0 +1,3 @@
+com/provider/registration/service/AuthenticationServiceTest.class
+com/provider/registration/validation/StrongPasswordValidatorTest.class
+com/provider/registration/security/JwtTokenUtilTest.class
