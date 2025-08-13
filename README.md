@@ -1,234 +1,207 @@
-# Provider Registration Service
+# HealthFirst Client Application
 
-A Spring Boot application for healthcare provider registration with comprehensive validation, security, and testing.
+A modern, responsive healthcare application built with React and Tailwind CSS, featuring separate portals for healthcare providers and patients.
 
 ## Features
 
-- **Provider Registration**: Complete registration workflow with validation
-- **Password Security**: BCrypt password hashing with 12 salt rounds
-- **Input Validation**: Comprehensive validation using JSR-380 (Bean Validation)
-- **Custom Password Validation**: Strong password requirements
-- **Duplicate Detection**: Prevents duplicate email, phone, and license numbers
-- **H2 Database**: In-memory database with console access
-- **Comprehensive Testing**: Unit tests for all components
-- **Java 17**: Uses Maven toolchains for Java 17 compatibility
+### Provider Portal
+- **Secure Login Interface**: Professional login form with real-time validation
+- **Provider Registration**: Comprehensive registration form with split layout design
+- **Form Validation**: Email format validation, password strength requirements
+- **Interactive States**: Loading, error, and success states with proper feedback
+- **Security Features**: Password masking with show/hide toggle
+- **Responsive Design**: Mobile-optimized layout with touch-friendly controls
+- **Accessibility**: Proper ARIA labels and keyboard navigation support
+
+### Patient Portal
+- Coming soon...
 
 ## Technology Stack
 
-- **Java 17** (with Maven Toolchains)
-- **Spring Boot 3.2.0**
-- **Spring Web**
-- **Spring Data JPA**
-- **Spring Security**
-- **H2 Database**
-- **Lombok**
-- **Hibernate Validator**
-- **JUnit 5**
+- **React 18**: Modern React with hooks and functional components
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
+- **Heroicons**: Beautiful, hand-crafted SVG icons
+- **React Scripts**: Create React App build tools
 
-## Prerequisites
+## Getting Started
 
-- Java 17 (or configure Maven toolchains)
-- Maven 3.6+
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
 
-## Setup
+### Installation
 
-### 1. Clone and Navigate
+1. Clone the repository:
 ```bash
-cd provider-registration
+git clone <repository-url>
+cd health-first-client
 ```
 
-### 2. Build the Project
+2. Install dependencies:
 ```bash
-mvn clean compile
+npm install
 ```
 
-### 3. Run Tests
+3. Start the development server:
 ```bash
-mvn test
+npm start
 ```
 
-### 4. Run the Application
-```bash
-mvn spring-boot:run
+4. Open [http://localhost:3000](http://localhost:3000) to view the application in your browser.
+
+### Available Scripts
+
+- `npm start` - Runs the app in development mode
+- `npm build` - Builds the app for production
+- `npm test` - Launches the test runner
+- `npm eject` - Ejects from Create React App (one-way operation)
+
+## Project Structure
+
+```
+health-first-client/
+├── public/
+│   ├── index.html          # Main HTML file
+│   └── manifest.json       # PWA manifest
+├── src/
+│   ├── provider-portal/
+│   │   ├── Login.js        # Provider login component
+│   │   ├── Login.test.js   # Login component tests
+│   │   ├── ProviderRegister.jsx  # Provider registration component
+│   │   └── ProviderRegister.test.js  # Registration component tests
+│   ├── patient-portal/     # Patient portal components (coming soon)
+│   ├── App.js             # Main app component
+│   ├── index.js           # React entry point
+│   └── index.css          # Global styles with Tailwind
+├── tailwind.config.js     # Tailwind CSS configuration
+├── postcss.config.js      # PostCSS configuration
+└── package.json           # Dependencies and scripts
 ```
 
-The application will start on `http://localhost:8080`
+## Provider Portal Features
 
-## API Endpoints
+### Login Interface
+- **Form Fields**: Email input, password input with show/hide toggle
+- **Validation**: Email format validation, password minimum length
+- **Interactive States**: Loading, error, and success states
+- **Security**: Password masking, HIPAA compliance indicators
+- **Responsive**: Mobile-optimized with touch-friendly controls
 
-### Provider Registration
-- **POST** `/providers/register`
-- **Content-Type**: `application/json`
+### Registration Interface
+- **Split Layout**: Left side with marketing content, right side with form
+- **Form Sections**:
+  - **Personal Information**: First name, last name, email, phone
+  - **Professional Information**: Specialization, license number, years of experience
+  - **Clinic Address**: Street address, city, state, ZIP code
+  - **Account Security**: Password with strength indicator, confirm password
+- **Validation Rules**:
+  - Required field validation
+  - Email and phone format validation
+  - Medical license number (alphanumeric only)
+  - Years of experience (0-50 range)
+  - ZIP code format validation
+  - Password strength requirements (8+ chars, uppercase, lowercase, number, special char)
+  - Password confirmation matching
+- **Interactive Features**:
+  - Real-time validation feedback
+  - Password strength indicator with visual feedback
+  - Password visibility toggles
+  - Loading states during form submission
+  - Success/error message handling
+- **Marketing Content**:
+  - Professional doctor image placeholder
+  - Trust badges and statistics
+  - HIPAA compliance indicators
+  - Call-to-action messaging
 
-#### Request Body Example:
-```json
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "phoneNumber": "+1234567890",
-  "password": "StrongPass123!",
-  "specialization": "Cardiology",
-  "licenseNumber": "LIC123456",
-  "yearsOfExperience": 10,
-  "clinicAddress": {
-    "street": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zip": "10001"
-  }
-}
-```
+### Validation Rules
+- Email format validation (real-time)
+- Required field validation
+- Password minimum length (8 characters)
+- Password strength requirements (uppercase, lowercase, number, special character)
+- Real-time validation feedback
 
-#### Response Example:
-```json
-{
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "specialization": "Cardiology",
-  "verificationStatus": "PENDING",
-  "createdAt": "2024-01-15T10:30:00",
-  "message": "Provider registered successfully. Verification status: PENDING"
-}
-```
+### Interactive States
+- **Default**: Clean form ready for input
+- **Loading**: Submit button shows spinner, form disabled
+- **Error**: Clear error messages for validation and submission failures
+- **Success**: Success indicator before redirect
 
-## Validation Rules
+### Security Features
+- Password masked by default
+- Secure show/hide password toggle
+- Form submission protection
+- HIPAA compliance indicators
+- Password strength requirements
 
-### Password Requirements
-- Minimum 8 characters
-- At least 1 uppercase letter
-- At least 1 lowercase letter
-- At least 1 number
-- At least 1 special character
+### Responsive Design
+- Mobile-optimized layout
+- Touch-friendly button and input sizes
+- Adaptive spacing for various screen sizes
+- Support for both orientations
+- Split layout adapts to single column on mobile
 
-### Field Validations
-- **First/Last Name**: 2-50 characters, required
-- **Email**: Valid email format, unique, required
-- **Phone Number**: International format, unique, required
-- **Specialization**: 3-100 characters, required
-- **License Number**: Alphanumeric only, unique, required
-- **Years of Experience**: 0-50, optional
-- **Address**: All fields required with specific length limits
+## Customization
 
-## Database
+### Colors
+The application uses a custom healthcare color palette defined in `tailwind.config.js`:
 
-### H2 Console
-- **URL**: `http://localhost:8080/h2-console`
-- **JDBC URL**: `jdbc:h2:mem:testdb`
-- **Username**: `sa`
-- **Password**: (empty)
+- Primary colors: Blue shades for general UI
+- Healthcare colors: Teal/blue shades for healthcare-specific elements
 
-### Schema
-The database schema is automatically generated by Hibernate with `ddl-auto=update`.
-
-## Testing
-
-### Run All Tests
-```bash
-mvn test
-```
-
-### Test Coverage
-- **StrongPasswordValidator**: Password strength validation
-- **ProviderService**: Business logic and duplicate detection
-- **ProviderController**: API endpoints and validation
-
-### Test Categories
-- Input validation (missing fields, invalid formats)
-- Password strength logic
-- Duplicate email/phone/license scenarios
-- BCrypt password matching
-- Input sanitization
-
-## Error Handling
-
-### HTTP Status Codes
-- **201 Created**: Successful registration
-- **422 Unprocessable Entity**: Validation errors
-- **409 Conflict**: Duplicate resources (email, phone, license)
-
-### Error Response Format
-```json
-{
-  "error": "Validation Error",
-  "status": 422,
-  "fieldErrors": {
-    "email": "Email must be a valid email address",
-    "password": "Password must be at least 8 characters long..."
-  }
-}
-```
-
-## Security Features
-
-- **Password Hashing**: BCrypt with 12 salt rounds
-- **Input Sanitization**: Automatic trimming and case normalization
-- **No Plain Text Passwords**: Passwords are never stored or returned in plain text
-- **CSRF Protection**: Disabled for API endpoints
-- **H2 Console Access**: Configured for development
-
-## Maven Toolchains
-
-The project uses Maven toolchains to ensure Java 17 compatibility without changing system-wide Java settings.
-
-### Toolchains Configuration
-If you need to configure toolchains, create `~/.m2/toolchains.xml`:
-
-```xml
-<toolchains>
-  <toolchain>
-    <type>jdk</type>
-    <provides>
-      <version>17</version>
-      <vendor>oracle</vendor>
-    </provides>
-    <configuration>
-      <jdkHome>/path/to/java17</jdkHome>
-    </configuration>
-  </toolchain>
-</toolchains>
-```
+### Styling
+Custom CSS classes are defined in `src/index.css`:
+- `.btn-primary` - Primary button styling
+- `.btn-secondary` - Secondary button styling
+- `.input-field` - Form input styling
+- `.input-error` - Error state styling
+- `.error-message` - Error text styling
+- `.success-message` - Success text styling
 
 ## Development
 
-### Project Structure
-```
-src/
-├── main/
-│   ├── java/com/provider/registration/
-│   │   ├── config/           # Configuration classes
-│   │   ├── controller/       # REST controllers
-│   │   ├── dto/             # Data Transfer Objects
-│   │   ├── model/           # JPA entities
-│   │   ├── repository/      # Data access layer
-│   │   ├── service/         # Business logic
-│   │   └── validation/      # Custom validators
-│   └── resources/
-│       └── application.properties
-└── test/
-    └── java/com/provider/registration/
-        ├── controller/       # Controller tests
-        ├── service/         # Service tests
-        └── validation/      # Validator tests
-```
+### Adding New Components
+1. Create new components in the appropriate portal directory
+2. Follow the existing naming conventions
+3. Use Tailwind CSS classes for styling
+4. Implement proper accessibility features
+5. Add comprehensive tests
 
-### Key Classes
-- **Provider**: JPA entity with validation annotations
-- **ProviderRegistrationRequest**: DTO for registration requests
-- **ProviderService**: Business logic implementation
-- **ProviderController**: REST API endpoints
-- **StrongPasswordValidator**: Custom password validation
-- **SecurityConfig**: Spring Security configuration
+### Styling Guidelines
+- Use Tailwind CSS utility classes
+- Follow the established color palette
+- Ensure responsive design
+- Maintain accessibility standards
+
+### Testing
+- All components include comprehensive test suites
+- Tests cover form validation, user interactions, and edge cases
+- Use React Testing Library for component testing
+- Mock external dependencies appropriately
+
+## Security Considerations
+
+- Form inputs are properly sanitized
+- Password fields use appropriate input types
+- CSRF protection ready for backend integration
+- HIPAA compliance indicators included
+- Password strength requirements enforced
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## Contributing
 
-1. Ensure all tests pass
-2. Follow existing code style
-3. Add tests for new features
-4. Update documentation as needed
+1. Follow the existing code style
+2. Add proper comments and documentation
+3. Test on multiple devices and browsers
+4. Ensure accessibility compliance
+5. Write comprehensive tests for new features
 
 ## License
 
-This project is for educational purposes.
+This project is licensed under the MIT License. 

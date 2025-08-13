@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProviderLogin from './provider-portal/Login.jsx';
 import ProviderRegister from './provider-portal/ProviderRegister';
 import ProviderDashboard from './provider-portal/ProviderDashboard';
+import PatientDashboard from './provider-portal/PatientDashboard';
 import PatientLogin from './patient-portal/PatientLogin';
 import PatientRegistration from './patient-portal/PatientRegistration';
 
@@ -24,6 +25,9 @@ function App() {
     } else if (path === '/provider/dashboard') {
       setCurrentPage('provider-dashboard');
       setPortal('provider');
+    } else if (path === '/provider/patients') {
+      setCurrentPage('provider-patients');
+      setPortal('provider');
     } else {
       setCurrentPage('login');
       setPortal('provider');
@@ -39,6 +43,7 @@ function App() {
     else if (page === 'patient-login') path = '/patient';
     else if (page === 'patient-register') path = '/patient/register';
     else if (page === 'provider-dashboard') path = '/provider/dashboard';
+    else if (page === 'provider-patients') path = '/provider/patients';
     window.history.pushState({}, '', path);
   };
 
@@ -57,6 +62,9 @@ function App() {
         setPortal('patient');
       } else if (path === '/provider/dashboard') {
         setCurrentPage('provider-dashboard');
+        setPortal('provider');
+      } else if (path === '/provider/patients') {
+        setCurrentPage('provider-patients');
         setPortal('provider');
       } else {
         setCurrentPage('login');
@@ -79,6 +87,8 @@ function App() {
     if (portal === 'provider') {
       if (currentPage === 'provider-dashboard') {
         return <ProviderDashboard />;
+      } else if (currentPage === 'provider-patients') {
+        return <PatientDashboard />;
       } else if (currentPage === 'register') {
         return <ProviderRegister />;
       } else {

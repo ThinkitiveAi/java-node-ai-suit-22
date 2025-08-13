@@ -5,6 +5,11 @@ const ProviderDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
 
+  const navigateToPatients = () => {
+    window.history.pushState({}, '', '/provider/patients');
+    window.location.reload();
+  };
+
   // Sample patient data
   const patients = [
     {
@@ -103,6 +108,14 @@ const ProviderDashboard = () => {
 
           {/* Right Side */}
           <div className="flex items-center space-x-4">
+            {/* View Patients List Button */}
+            <button
+              onClick={navigateToPatients}
+              className="flex items-center space-x-2 px-4 py-2 bg-healthcare-600 text-white rounded-md text-sm font-medium hover:bg-healthcare-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-healthcare-500"
+            >
+              <span>View Patients List</span>
+            </button>
+
             {/* Sort Dropdown */}
             <div className="relative">
               <select
